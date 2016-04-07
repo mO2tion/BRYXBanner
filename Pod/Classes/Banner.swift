@@ -117,6 +117,15 @@ public class Banner: UIView {
         return label
         }()
     
+    /// The button on the right of the banner.
+    let buttonLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     /// The image on the left of the banner.
     let image: UIImage?
     
@@ -136,16 +145,18 @@ public class Banner: UIView {
         }
     }
     
-    /// A Banner with the provided `title`, `subtitle`, and optional `image`, ready to be presented with `show()`.
+    /// A Banner with the provided `title`, `subtitle`, and optional `image` and `button`, ready to be presented with `show()`.
     ///
     /// - parameter title: The title of the banner. Optional. Defaults to nil.
     /// - parameter subtitle: The subtitle of the banner. Optional. Defaults to nil.
     /// - parameter image: The image on the left of the banner. Optional. Defaults to nil.
+    /// - parameter button: The button on the right of the banner. Optional. Defaults to nil.
     /// - parameter backgroundColor: The color of the banner's background view. Defaults to `UIColor.blackColor()`.
     /// - parameter didTapBlock: An action to be called when the user taps on the banner. Optional. Defaults to `nil`.
-    public required init(title: String? = nil, subtitle: String? = nil, image: UIImage? = nil, backgroundColor: UIColor = UIColor.blackColor(), didTapBlock: (() -> ())? = nil) {
+    public required init(title: String? = nil, subtitle: String? = nil, image: UIImage? = nil, buttonTitle: String? = "Dismiss", backgroundColor: UIColor = UIColor.blackColor(), didTapBlock: (() -> ())? = nil) {
         self.didTapBlock = didTapBlock
         self.image = image
+        buttonLabel.text = buttonTitle
         super.init(frame: CGRectZero)
         resetShadows()
         addGestureRecognizers()
@@ -200,6 +211,7 @@ public class Banner: UIView {
     private func resetTintColor() {
         titleLabel.textColor = textColor
         detailLabel.textColor = textColor
+        buttonLabel.textColor = textColor
         imageView.image = shouldTintImage ? image?.imageWithRenderingMode(.AlwaysTemplate) : image
         imageView.tintColor = shouldTintImage ? textColor : nil
     }
@@ -221,7 +233,8 @@ public class Banner: UIView {
             "imageView": imageView,
             "labelView": labelView,
             "titleLabel": titleLabel,
-            "detailLabel": detailLabel
+            "detailLabel": detailLabel,
+            "buttonLabel": buttonLabel
         ]
         translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundView)
@@ -249,7 +262,17 @@ public class Banner: UIView {
             imageView.addConstraint(imageView.constraintWithAttribute(.Height, .Equal, to: .Width))
             leftConstraintText = "[imageView]"
         }
-        let constraintFormat = "H:\(leftConstraintText)-(15)-[labelView]-(8)-|"
+        let rightConstraintText: String
+        if buttonLabel.text == nil {
+            rightConstraintText = "|"
+        } else {
+            contentView.addSubview(buttonLabel)
+            contentView.addConstraint(buttonLabel.constraintWithAttribute(.CenterY, .Equal, to: contentView))
+            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.Width, .Equal, to: 60.0))
+            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.Height, .Equal, to: .Width))
+            rightConstraintText = "[buttonLabel]-(10)-|"
+        }
+        let constraintFormat = "H:\(leftConstraintText)-(15)-[labelView]-(8)-\(rightConstraintText)"
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints(NSLayoutConstraint.defaultConstraintsWithVisualFormat(constraintFormat, views: views))
         contentView.addConstraints(NSLayoutConstraint.defaultConstraintsWithVisualFormat("V:|-(>=1)-[labelView]-(>=1)-|", views: views))
