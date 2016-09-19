@@ -139,7 +139,7 @@ open class Banner: UIView {
     /// The button on the right of the banner.
     let buttonLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -170,9 +170,9 @@ open class Banner: UIView {
     /// - parameter subtitle: The subtitle of the banner. Optional. Defaults to nil.
     /// - parameter image: The image on the left of the banner. Optional. Defaults to nil.
     /// - parameter button: The button on the right of the banner. Optional. Defaults to nil.
-    /// - parameter backgroundColor: The color of the banner's background view. Defaults to `UIColor.blackColor()`.
+    /// - parameter backgroundColor: The color of the banner's background view. Defaults to `UIColor.black`.
     /// - parameter didTapBlock: An action to be called when the user taps on the banner. Optional. Defaults to `nil`.
-    public required init(title: String? = nil, subtitle: String? = nil, image: UIImage? = nil, buttonTitle: String? = "Dismiss", backgroundColor: UIColor = UIColor.blackColor(), didTapBlock: (() -> ())? = nil) {
+    public required init(title: String? = nil, subtitle: String? = nil, image: UIImage? = nil, buttonTitle: String? = "Dismiss", backgroundColor: UIColor = UIColor.black, didTapBlock: (() -> ())? = nil) {
         self.didTapBlock = didTapBlock
         self.image = image
         buttonLabel.text = buttonTitle
@@ -228,7 +228,7 @@ open class Banner: UIView {
     private func addGestureRecognizers() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: .bannerTapped))
         let swipe = UISwipeGestureRecognizer(target: self, action: .bannerSwiped)
-        swipe.direction = .Up
+        swipe.direction = .up
         addGestureRecognizer(swipe)
     }
     
@@ -291,9 +291,9 @@ open class Banner: UIView {
             rightConstraintText = "|"
         } else {
             contentView.addSubview(buttonLabel)
-            contentView.addConstraint(buttonLabel.constraintWithAttribute(.CenterY, .Equal, to: contentView))
-            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.Width, .Equal, to: 60.0))
-            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.Height, .Equal, to: .Width))
+            contentView.addConstraint(buttonLabel.constraintWithAttribute(.centerY, .equal, to: contentView))
+            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.width, .equal, to: 60.0))
+            buttonLabel.addConstraint(buttonLabel.constraintWithAttribute(.height, .equal, to: .width))
             rightConstraintText = "[buttonLabel]-(10)-|"
         }
         let constraintFormat = "H:\(leftConstraintText)-(15)-[labelView]-(8)-\(rightConstraintText)"
