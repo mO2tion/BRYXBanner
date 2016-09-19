@@ -101,12 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCEB2C511C3F3042003BAF35 /* Build configuration list for PBXNativeTarget "BRYXBannerExample" */;
 			buildPhases = (
-				64BE5151BC198851B3B9BBF1 /* Check Pods Manifest.lock */,
+				64BE5151BC198851B3B9BBF1 /* [CP] Check Pods Manifest.lock */,
 				DCEB2C251C3F3041003BAF35 /* Sources */,
 				DCEB2C261C3F3041003BAF35 /* Frameworks */,
 				DCEB2C271C3F3041003BAF35 /* Resources */,
-				E4F6B6B00BFD04754109CEA1 /* Embed Pods Frameworks */,
-				30493477875F4A81D846D330 /* Copy Pods Resources */,
+				E4F6B6B00BFD04754109CEA1 /* [CP] Embed Pods Frameworks */,
+				30493477875F4A81D846D330 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,11 +124,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Bryx, Inc";
 				TargetAttributes = {
 					DCEB2C281C3F3041003BAF35 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = W7GJMYD5A4;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -163,14 +165,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		30493477875F4A81D846D330 /* Copy Pods Resources */ = {
+		30493477875F4A81D846D330 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,29 +180,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BRYXBannerExample/Pods-BRYXBannerExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		64BE5151BC198851B3B9BBF1 /* Check Pods Manifest.lock */ = {
+		64BE5151BC198851B3B9BBF1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E4F6B6B00BFD04754109CEA1 /* Embed Pods Frameworks */ = {
+		E4F6B6B00BFD04754109CEA1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,8 +239,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -282,8 +286,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -302,6 +308,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -311,11 +318,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5579572A0E8F8316AFEA873A /* Pods-BRYXBannerExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W7GJMYD5A4;
 				INFOPLIST_FILE = BRYXBanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryx.BRYXBanner;
 				PRODUCT_NAME = BRYXBannerExample;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -323,11 +333,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C0B0BEBC6CD17E26DD702F49 /* Pods-BRYXBannerExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W7GJMYD5A4;
 				INFOPLIST_FILE = BRYXBanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryx.BRYXBanner;
 				PRODUCT_NAME = BRYXBannerExample;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
